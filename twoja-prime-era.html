@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Twoja Prime Era — Klub dla kobiet</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --green-dark: #1C2B1E;
+  --green-mid: #2D4A30;
+  --green-soft: #4A7C52;
+  --green-pale: #C8DBC9;
+  --cream: #F5F0E8;
+  --cream-dark: #EDE6D6;
+  --beige: #D4C9B0;
+  --white: #FDFCF9;
+  --text-dark: #1C2B1E;
+  --text-mid: #4A5E4C;
+  --text-light: #7A8C7C;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--white); color: var(--text-dark); overflow-x: hidden; }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 48px;
+  background: rgba(253,252,249,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(28,43,30,0.08);
+}
+.nav-logo { font-family: var(--font-display); font-size: 18px; color: var(--green-dark); letter-spacing: 0.02em; }
+.nav-logo span { font-style: italic; color: var(--green-soft); }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a { font-size: 14px; color: var(--text-mid); text-decoration: none; letter-spacing: 0.02em; transition: color 0.2s; }
+.nav-links a:hover { color: var(--green-dark); }
+.nav-cta {
+  background: var(--green-dark); color: var(--white);
+  padding: 12px 28px; border-radius: 100px;
+  font-size: 13px; font-weight: 500; text-decoration: none;
+  letter-spacing: 0.03em; transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--green-mid); }
+
+/* HERO */
+.hero {
+  min-height: 100vh; padding: 120px 48px 80px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+  align-items: center; background: var(--white);
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; top: -100px; right: -100px;
+  width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,219,201,0.3) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-left { display: flex; flex-direction: column; gap: 32px; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--cream); border: 1px solid var(--beige);
+  border-radius: 100px; padding: 8px 18px; width: fit-content;
+  font-size: 12px; color: var(--green-soft); letter-spacing: 0.05em; text-transform: uppercase; font-weight: 500;
+}
+.hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--green-soft); }
+
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(42px, 5vw, 68px);
+  line-height: 1.1; font-weight: 400;
+  color: var(--green-dark);
+}
+.hero-title em { font-style: italic; color: var(--green-soft); }
+
+.hero-sub {
+  font-size: 17px; line-height: 1.7;
+  color: var(--text-mid); max-width: 440px; font-weight: 300;
+}
+
+.hero-actions { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--green-dark); color: var(--white);
+  padding: 16px 36px; border-radius: 100px;
+  font-size: 15px; font-weight: 500; text-decoration: none;
+  letter-spacing: 0.02em; transition: all 0.2s;
+  border: none; cursor: pointer;
+}
+.btn-primary:hover { background: var(--green-mid); transform: translateY(-1px); }
+.btn-ghost {
+  color: var(--text-mid); font-size: 14px; text-decoration: none;
+  display: flex; align-items: center; gap: 8px;
+  transition: color 0.2s;
+}
+.btn-ghost:hover { color: var(--green-dark); }
+.btn-ghost::after { content: '→'; }
+
+.hero-social-proof {
+  display: flex; align-items: center; gap: 16px;
+  padding-top: 8px;
+}
+.avatars { display: flex; }
+.avatar {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--green-pale); border: 2px solid var(--white);
+  margin-left: -10px; first-child { margin-left: 0; }
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 500; color: var(--green-dark);
+  overflow: hidden;
+}
+.avatar:first-child { margin-left: 0; }
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+.proof-text { font-size: 13px; color: var(--text-light); line-height: 1.4; }
+.proof-text strong { color: var(--green-dark); font-weight: 500; }
+.stars { color: var(--green-soft); font-size: 12px; display: block; margin-top: 2px; }
+
+/* HERO RIGHT */
+.hero-right { position: relative; height: 620px; }
+
+.hero-photo {
+  width: 100%; height: 100%;
+  border-radius: 24px;
+  background: var(--cream-dark);
+  overflow: hidden; position: relative;
+}
+.hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+.photo-placeholder {
+  width: 100%; height: 100%;
+  background: linear-gradient(160deg, var(--cream) 0%, var(--green-pale) 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 12px; color: var(--text-light); font-size: 14px; text-align: center; padding: 24px;
+}
+.photo-placeholder svg { opacity: 0.4; }
+
+/* FLOATING CARDS */
+.float-card {
+  position: absolute;
+  background: var(--white);
+  border-radius: 16px;
+  padding: 14px 18px;
+  box-shadow: 0 8px 32px rgba(28,43,30,0.12);
+  display: flex; align-items: center; gap: 10px;
+  font-size: 13px; font-weight: 500; color: var(--green-dark);
+  white-space: nowrap;
+}
+.float-card .icon {
+  width: 32px; height: 32px; border-radius: 10px;
+  background: var(--green-pale);
+  display: flex; align-items: center; justify-content: center; font-size: 16px;
+  flex-shrink: 0;
+}
+.float-card .sub { font-size: 11px; color: var(--text-light); font-weight: 400; display: block; margin-top: 1px; }
+
+.card-energy { top: 40px; left: -40px; }
+.card-members { bottom: 100px; left: -50px; }
+.card-result { top: 160px; right: -30px; }
+.card-cycle { bottom: 40px; right: 20px; }
+
+/* PAIN SECTION */
+.pain-section {
+  padding: 100px 48px;
+  background: var(--cream);
+}
+.section-eyebrow {
+  font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
+  color: var(--green-soft); font-weight: 500; margin-bottom: 16px;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 400; line-height: 1.2;
+  color: var(--green-dark); margin-bottom: 60px;
+}
+.section-title em { font-style: italic; }
+
+.pain-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+}
+.pain-card {
+  background: var(--white); padding: 36px 28px;
+  position: relative; overflow: hidden;
+}
+.pain-card:first-child { border-radius: 16px 0 0 0; }
+.pain-card:nth-child(3) { border-radius: 0 16px 0 0; }
+.pain-card:nth-child(4) { border-radius: 0 0 0 16px; }
+.pain-card:last-child { border-radius: 0 0 16px 0; }
+.pain-card::before {
+  content: '"'; position: absolute; top: 16px; right: 20px;
+  font-family: var(--font-display); font-size: 80px; line-height: 1;
+  color: var(--green-pale); font-style: italic;
+}
+.pain-card p { font-size: 15px; line-height: 1.6; color: var(--text-mid); position: relative; }
+
+/* QUOTE SECTION */
+.quote-section {
+  padding: 100px 48px;
+  background: var(--green-dark);
+  text-align: center;
+}
+.quote-text {
+  font-family: var(--font-display);
+  font-size: clamp(24px, 3.5vw, 44px);
+  font-weight: 400; font-style: italic;
+  color: var(--cream); line-height: 1.4;
+  max-width: 800px; margin: 0 auto 24px;
+}
+.quote-author { font-size: 14px; color: var(--green-pale); letter-spacing: 0.05em; }
+
+/* WHAT YOU GET */
+.benefits-section { padding: 100px 48px; background: var(--white); }
+.benefits-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px;
+}
+.benefit-card {
+  padding: 36px 28px;
+  border: 1px solid var(--cream-dark);
+  border-radius: 20px; transition: border-color 0.2s, transform 0.2s;
+}
+.benefit-card:hover { border-color: var(--green-pale); transform: translateY(-4px); }
+.benefit-icon {
+  width: 48px; height: 48px; border-radius: 14px;
+  background: var(--cream); display: flex; align-items: center;
+  justify-content: center; font-size: 22px; margin-bottom: 20px;
+}
+.benefit-title { font-size: 16px; font-weight: 500; color: var(--green-dark); margin-bottom: 10px; }
+.benefit-desc { font-size: 14px; line-height: 1.6; color: var(--text-light); }
+
+/* HOW IT WORKS */
+.how-section {
+  padding: 100px 48px;
+  background: var(--cream);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+}
+.how-left {}
+.how-timeline { margin-top: 48px; display: flex; flex-direction: column; gap: 0; }
+.how-step {
+  display: flex; gap: 24px; padding-bottom: 40px;
+  position: relative;
+}
+.how-step::before {
+  content: ''; position: absolute;
+  left: 19px; top: 40px; bottom: 0;
+  width: 1px; background: var(--beige);
+}
+.how-step:last-child::before { display: none; }
+.step-num {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--green-dark); color: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 500; flex-shrink: 0;
+}
+.step-content {}
+.step-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); margin-bottom: 4px; }
+.step-title { font-size: 16px; font-weight: 500; color: var(--green-dark); margin-bottom: 6px; }
+.step-desc { font-size: 14px; line-height: 1.6; color: var(--text-mid); }
+
+.how-right {}
+.month-card {
+  background: var(--green-dark); border-radius: 24px; padding: 36px;
+  color: var(--cream);
+}
+.month-card-title { font-family: var(--font-display); font-size: 22px; font-style: italic; margin-bottom: 28px; color: var(--white); }
+.week-item {
+  padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+  display: flex; gap: 16px; align-items: flex-start;
+}
+.week-item:last-child { border-bottom: none; }
+.week-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--green-pale); flex-shrink: 0; padding-top: 2px; min-width: 72px; }
+.week-desc { font-size: 14px; color: rgba(253,252,249,0.85); line-height: 1.5; }
+
+/* FOR WHO */
+.forwho-section {
+  padding: 100px 48px; background: var(--white);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+}
+.forwho-col { padding: 40px; border-radius: 20px; }
+.forwho-col.yes { background: var(--cream); }
+.forwho-col.no { background: #fafafa; border: 1px solid var(--cream-dark); }
+.forwho-heading { font-size: 18px; font-weight: 500; color: var(--green-dark); margin-bottom: 24px; display: flex; align-items: center; gap: 10px; }
+.forwho-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+.forwho-list li { font-size: 14px; line-height: 1.5; color: var(--text-mid); display: flex; gap: 10px; align-items: flex-start; }
+.forwho-list li::before { flex-shrink: 0; margin-top: 2px; }
+.forwho-col.yes .forwho-list li::before { content: '✓'; color: var(--green-soft); font-weight: 600; }
+.forwho-col.no .forwho-list li::before { content: '✕'; color: #c0a090; }
+
+/* ABOUT */
+.about-section {
+  padding: 100px 48px; background: var(--cream);
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+}
+.about-photo {
+  height: 560px; border-radius: 20px;
+  background: var(--cream-dark); overflow: hidden;
+}
+.about-photo img { width: 100%; height: 100%; object-fit: cover; }
+.about-photo-placeholder {
+  width: 100%; height: 100%;
+  background: linear-gradient(160deg, var(--beige) 0%, var(--green-pale) 100%);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-light); font-size: 14px;
+}
+.about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 40px; }
+.stat-card { background: var(--white); border-radius: 16px; padding: 24px; }
+.stat-num { font-family: var(--font-display); font-size: 36px; color: var(--green-dark); line-height: 1; }
+.stat-label { font-size: 12px; color: var(--text-light); margin-top: 4px; }
+
+/* PRICING */
+.pricing-section { padding: 100px 48px; background: var(--white); text-align: center; }
+.pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 800px; margin: 60px auto 0; }
+.price-card { border: 1.5px solid var(--cream-dark); border-radius: 24px; padding: 40px 36px; text-align: left; position: relative; }
+.price-card.featured { border-color: var(--green-dark); }
+.price-badge {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  background: var(--green-dark); color: var(--white);
+  padding: 4px 18px; border-radius: 100px; font-size: 11px;
+  white-space: nowrap; letter-spacing: 0.05em;
+}
+.price-period { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-light); margin-bottom: 12px; }
+.price-amount { font-family: var(--font-display); font-size: 52px; color: var(--green-dark); line-height: 1; }
+.price-amount sup { font-size: 22px; vertical-align: super; font-family: var(--font-body); }
+.price-amount sub { font-size: 16px; font-family: var(--font-body); color: var(--text-light); }
+.price-desc { font-size: 13px; color: var(--text-light); margin-top: 8px; margin-bottom: 28px; }
+.price-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+.price-features li { font-size: 14px; color: var(--text-mid); display: flex; gap: 8px; align-items: flex-start; }
+.price-features li::before { content: '✓'; color: var(--green-soft); font-weight: 600; flex-shrink: 0; }
+.price-btn {
+  width: 100%; padding: 14px; border-radius: 100px;
+  font-size: 14px; font-weight: 500; cursor: pointer;
+  text-decoration: none; display: block; text-align: center;
+  transition: all 0.2s; letter-spacing: 0.02em;
+}
+.price-btn-outline { border: 1.5px solid var(--green-dark); color: var(--green-dark); background: transparent; }
+.price-btn-outline:hover { background: var(--green-dark); color: var(--white); }
+.price-btn-fill { background: var(--green-dark); color: var(--white); border: none; }
+.price-btn-fill:hover { background: var(--green-mid); }
+.price-note { font-size: 12px; color: var(--text-light); text-align: center; margin-top: 24px; }
+
+/* FAQ */
+.faq-section { padding: 100px 48px; background: var(--cream); }
+.faq-grid { max-width: 760px; margin: 60px auto 0; display: flex; flex-direction: column; gap: 2px; }
+.faq-item { background: var(--white); }
+.faq-item:first-child { border-radius: 16px 16px 0 0; }
+.faq-item:last-child { border-radius: 0 0 16px 16px; }
+.faq-q {
+  padding: 22px 28px; font-size: 15px; font-weight: 500;
+  color: var(--green-dark); cursor: pointer;
+  display: flex; justify-content: space-between; align-items: center;
+  user-select: none;
+}
+.faq-q::after { content: '+'; font-size: 20px; color: var(--green-soft); transition: transform 0.2s; }
+.faq-item.open .faq-q::after { transform: rotate(45deg); }
+.faq-a { display: none; padding: 0 28px 22px; font-size: 14px; line-height: 1.7; color: var(--text-mid); }
+.faq-item.open .faq-a { display: block; }
+
+/* FINAL CTA */
+.cta-section {
+  padding: 120px 48px; background: var(--green-dark); text-align: center;
+}
+.cta-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 64px);
+  color: var(--white); font-weight: 400; line-height: 1.2; margin-bottom: 20px;
+}
+.cta-title em { font-style: italic; color: var(--green-pale); }
+.cta-sub { font-size: 17px; color: rgba(245,240,232,0.7); margin-bottom: 48px; font-weight: 300; }
+.cta-btn {
+  background: var(--white); color: var(--green-dark);
+  padding: 18px 48px; border-radius: 100px;
+  font-size: 16px; font-weight: 500; text-decoration: none;
+  display: inline-block; transition: all 0.2s; letter-spacing: 0.02em;
+}
+.cta-btn:hover { background: var(--cream); transform: translateY(-2px); }
+.cta-note { font-size: 13px; color: rgba(245,240,232,0.5); margin-top: 20px; }
+
+/* FOOTER */
+footer {
+  padding: 40px 48px; background: var(--green-dark);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-logo { font-family: var(--font-display); font-size: 16px; color: var(--cream); }
+.footer-logo span { font-style: italic; color: var(--green-pale); }
+.footer-copy { font-size: 12px; color: rgba(245,240,232,0.4); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; gap: 48px; }
+  .hero-right { height: 420px; }
+  .card-energy, .card-members { left: 0; }
+  .card-result { right: 0; }
+  .pain-grid { grid-template-columns: 1fr; }
+  .pain-card { border-radius: 0 !important; }
+  .pain-card:first-child { border-radius: 16px 16px 0 0 !important; }
+  .pain-card:last-child { border-radius: 0 0 16px 16px !important; }
+  .how-section, .about-section, .forwho-section { grid-template-columns: 1fr; padding: 60px 24px; gap: 40px; }
+  .benefits-grid, .pricing-grid { grid-template-columns: 1fr; }
+  .benefits-section, .faq-section, .benefits-section, .quote-section, .pricing-section, .cta-section { padding: 60px 24px; }
+  .pain-section { padding: 60px 24px; }
+  .about-stats { grid-template-columns: 1fr 1fr; }
+  footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Twoja <span>Prime Era</span></div>
+  <ul class="nav-links">
+    <li><a href="#co-dostajesz">O klubie</a></li>
+    <li><a href="#jak-dziala">Jak działa</a></li>
+    <li><a href="#o-ani">O mnie</a></li>
+    <li><a href="#cennik">Cennik</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="#cennik" class="nav-cta">Dołączam →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-badge">Klub dla kobiet · Siła · Energia · Biohacking</div>
+
+    <h1 class="hero-title">
+      Zacznij żyć<br>w swojej<br><em>Prime Erze.</em>
+    </h1>
+
+    <p class="hero-sub">
+      Klub dla kobiet 28–42, które mają dość życia na rezerwie. Treningi siłowe, protokoły biohackingu i trening z cyklem — wszystko w jednym miejscu.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#cennik" class="btn-primary">Dołączam do klubu</a>
+      <a href="#jak-dziala" class="btn-ghost">Zobacz jak to działa</a>
+    </div>
+
+    <div class="hero-social-proof">
+      <div class="avatars">
+        <div class="avatar">A</div>
+        <div class="avatar">K</div>
+        <div class="avatar">M</div>
+        <div class="avatar">J</div>
+      </div>
+      <div class="proof-text">
+        <strong>Dołącz do pierwszych uczestniczek</strong>
+        <span class="stars">★★★★★ Wczesny dostęp — cena startowa</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-photo">
+      <!-- ZASTĄP SWOIM ZDJĘCIEM: <img src="twoje-zdjecie.jpg" alt="Ania — trenerka"> -->
+      <div class="photo-placeholder">
+        <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+        <span>Tu wstaw swoje zdjęcie<br><small>Najlepiej pionowe, naturalne</small></span>
+      </div>
+    </div>
+
+    <!-- FLOATING CARDS -->
+    <div class="float-card card-energy">
+      <div class="icon">⚡</div>
+      <div>
+        <span>Więcej energii</span>
+        <span class="sub">od 1. tygodnia</span>
+      </div>
+    </div>
+
+    <div class="float-card card-members">
+      <div class="icon">👩</div>
+      <div>
+        <span>Zamknięta społeczność</span>
+        <span class="sub">kobiet jak Ty</span>
+      </div>
+    </div>
+
+    <div class="float-card card-result">
+      <div class="icon">💪</div>
+      <div>
+        <span>Trening siłowy</span>
+        <span class="sub">dom lub siłownia</span>
+      </div>
+    </div>
+
+    <div class="float-card card-cycle">
+      <div class="icon">🌙</div>
+      <div>
+        <span>Rytm cyklu</span>
+        <span class="sub">trening z hormonami</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAIN -->
+<section class="pain-section">
+  <p class="section-eyebrow">Rozpoznajesz siebie?</p>
+  <h2 class="section-title">Czy tak wygląda<br><em>Twój dzień?</em></h2>
+
+  <div class="pain-grid">
+    <div class="pain-card">
+      <p>Budzisz się zmęczona, zanim dzień się w ogóle zaczął.</p>
+    </div>
+    <div class="pain-card">
+      <p>Masz mgłę w głowie i trudno Ci się skupić po południu.</p>
+    </div>
+    <div class="pain-card">
+      <p>Wiesz, że powinnaś ćwiczyć — ale po prostu nie masz na to siły.</p>
+    </div>
+    <div class="pain-card">
+      <p>Twoje ciało się zmienia i nie wiesz, jak to zatrzymać.</p>
+    </div>
+    <div class="pain-card">
+      <p>Próbowałaś już diet i planów. Za każdym razem odpuszczałaś.</p>
+    </div>
+    <div class="pain-card">
+      <p>Gdzieś po drodze zgubiłaś siebie — i tę energię, którą kiedyś miałaś.</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-section">
+  <p class="quote-text">"To nie jest kwestia silnej woli. To kwestia systemu, który działa <em>z</em> Twoim ciałem — nie przeciwko niemu."</p>
+  <p class="quote-author">— Ania, założycielka Twoja Prime Era</p>
+</section>
+
+<!-- BENEFITS -->
+<section class="benefits-section" id="co-dostajesz">
+  <p class="section-eyebrow">Co dostajesz</p>
+  <h2 class="section-title">Wszystko, czego<br><em>potrzebujesz</em></h2>
+
+  <div class="benefits-grid">
+    <div class="benefit-card">
+      <div class="benefit-icon">🏋️</div>
+      <div class="benefit-title">Treningi siłowe</div>
+      <div class="benefit-desc">Nowy plan co miesiąc — do domu lub siłowni. 3–4 razy w tygodniu, 30–45 minut. Budujemy mięśnie, które dają energię.</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">🧬</div>
+      <div class="benefit-title">Protokoły biohackingu</div>
+      <div class="benefit-desc">Sen, HRV, zimny prysznic, rytm kortyzolu. Praktyczne protokoły oparte na nauce — nie teoria, tylko działanie.</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">🥦</div>
+      <div class="benefit-title">Żywienie dla energii</div>
+      <div class="benefit-desc">Nie liczysz kalorii. Uczysz się jeść tak, żeby mózg i mięśnie działały na 100% — przez cały dzień.</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">🌙</div>
+      <div class="benefit-title">Trening z cyklem</div>
+      <div class="benefit-desc">Plany dostosowane do fazy cyklu — folikularna, owulacja, lutealna, menstruacja. Twoje ciało ma swój rytm.</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">👩‍👩‍👧</div>
+      <div class="benefit-title">Zamknięta społeczność</div>
+      <div class="benefit-desc">Kobiety, które rozumieją przez co przechodzisz. Zero hejtu, samo wsparcie — bo razem idzie się dalej.</div>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon">🎙️</div>
+      <div class="benefit-title">Live Q&A co miesiąc</div>
+      <div class="benefit-desc">Raz w miesiącu spotkanie na żywo z Anią. Pytasz o wszystko — trening, cykl, żywienie, biohacking.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="jak-dziala">
+  <div class="how-left">
+    <p class="section-eyebrow">Jak to działa</p>
+    <h2 class="section-title">Twój system<br><em>na każdy tydzień</em></h2>
+
+    <div class="how-timeline">
+      <div class="how-step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-label">Tydzień 1</div>
+          <div class="step-title">Nowy plan + protokół</div>
+          <div class="step-desc">Dostajesz plan treningowy i biohacking protokół na cały miesiąc. Zaczynasz od razu.</div>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-label">Tydzień 2</div>
+          <div class="step-title">Materiał bonusowy lub live</div>
+          <div class="step-desc">Webinar, materiał edukacyjny lub live z Anią na aktualne pytania uczestniczek.</div>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-label">Tydzień 3</div>
+          <div class="step-title">Mid-check</div>
+          <div class="step-desc">Jak idzie? Co korygować? Ania odpowiada na pytania w grupie i pomaga dostosować plan.</div>
+        </div>
+      </div>
+      <div class="how-step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-label">Tydzień 4</div>
+          <div class="step-title">Podsumowanie i co dalej</div>
+          <div class="step-desc">Świętujemy efekty i przygotowujemy się na kolejny miesiąc. Każdy miesiąc to nowy poziom.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="how-right">
+    <div class="month-card">
+      <div class="month-card-title">Przykładowy miesiąc w klubie</div>
+      <div class="week-item">
+        <span class="week-label">Dzień 1</span>
+        <span class="week-desc">Nowy plan treningowy + protokół snu na ten miesiąc dostępny w grupie</span>
+      </div>
+      <div class="week-item">
+        <span class="week-label">Tydzień 1–2</span>
+        <span class="week-desc">3–4 treningi siłowe tygodniowo + codzienne protokoły 5–10 minut</span>
+      </div>
+      <div class="week-item">
+        <span class="week-label">Tydzień 2</span>
+        <span class="week-desc">Live Q&A z Anią — pytasz o wszystko co Cię nurtuje</span>
+      </div>
+      <div class="week-item">
+        <span class="week-label">Tydzień 3</span>
+        <span class="week-desc">Mid-check i dostosowanie planu do Twojej fazy cyklu</span>
+      </div>
+      <div class="week-item">
+        <span class="week-label">Tydzień 4</span>
+        <span class="week-desc">Podsumowanie + zajawka na kolejny miesiąc</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHO -->
+<section class="forwho-section">
+  <div class="forwho-col yes">
+    <div class="forwho-heading">✓ &nbsp;Ten klub jest dla Ciebie</div>
+    <ul class="forwho-list">
+      <li>Masz 28–42 lata i czujesz, że tracisz energię</li>
+      <li>Chcesz budować siłę i mięśnie, ale nie wiesz od czego zacząć</li>
+      <li>Szukasz systemu, a nie kolejnej chwilowej diety</li>
+      <li>Chcesz zrozumieć swój cykl i hormony</li>
+      <li>Jesteś gotowa działać 3–4 razy w tygodniu po 30–45 minut</li>
+      <li>Zależy Ci na zdrowiu długoterminowo — nie tylko na sylwetce</li>
+    </ul>
+  </div>
+  <div class="forwho-col no">
+    <div class="forwho-heading">✕ &nbsp;Ten klub NIE jest dla Ciebie</div>
+    <ul class="forwho-list">
+      <li>Szukasz magicznej pigułki bez żadnego wysiłku</li>
+      <li>Oczekujesz efektów widocznych po 2 tygodniach</li>
+      <li>Nie jesteś gotowa na żadne zmiany w nawykach</li>
+      <li>Chcesz schudnąć szybko przed wakacjami bez systemu</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="o-ani">
+  <div class="about-photo">
+    <!-- ZASTĄP: <img src="ania.jpg" alt="Ania — trenerka"> -->
+    <div class="about-photo-placeholder">Tu wstaw swoje zdjęcie</div>
+  </div>
+  <div class="about-right">
+    <p class="section-eyebrow">O mnie</p>
+    <h2 class="section-title">Cześć,<br>jestem <em>Ania</em></h2>
+    <p style="font-size:16px;line-height:1.8;color:var(--text-mid);margin-bottom:16px;">
+      Jestem certyfikowaną trenerką personalną z 7-letnim doświadczeniem. Sama przeszłam przez moment, kiedy budziłam się zmęczona, nie miałam siły na nic i czułam się obca we własnym ciele.
+    </p>
+    <p style="font-size:16px;line-height:1.8;color:var(--text-mid);">
+      Dlatego stworzyłam Twoja Prime Era — klub który łączy naukę o kobiecym ciele, trening siłowy i biohacking w jeden spójny system. Bez diety. Bez wyrzeczeń. Z pełnym zrozumieniem tego, jak działa Twój organizm.
+    </p>
+    <div class="about-stats">
+      <div class="stat-card">
+        <div class="stat-num">7+</div>
+        <div class="stat-label">lat doświadczenia</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">1200+</div>
+        <div class="stat-label">kobiet przeszkolonych</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3</div>
+        <div class="stat-label">certyfikaty trenerskie</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">100%</div>
+        <div class="stat-label">oparte na nauce</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="pricing-section" id="cennik">
+  <p class="section-eyebrow">Cennik</p>
+  <h2 class="section-title">Wybierz swój<br><em>plan</em></h2>
+
+  <div class="pricing-grid">
+    <div class="price-card">
+      <div class="price-period">Miesięczny</div>
+      <div class="price-amount"><sup>zł</sup>89<sub>/mies.</sub></div>
+      <div class="price-desc">Płacisz co miesiąc. Rezygnujesz kiedy chcesz.</div>
+      <ul class="price-features">
+        <li>Miesięczny plan treningowy (dom lub siłownia)</li>
+        <li>Protokoły biohackingu</li>
+        <li>Trening dostosowany do cyklu</li>
+        <li>Zamknięta grupa społeczności</li>
+        <li>Live Q&A raz w miesiącu</li>
+      </ul>
+      <a href="#" class="price-btn price-btn-outline">Wybieram miesięczny</a>
+    </div>
+
+    <div class="price-card featured">
+      <div class="price-badge">Najlepsza wartość</div>
+      <div class="price-period">Kwartalny</div>
+      <div class="price-amount"><sup>zł</sup>69<sub>/mies.</sub></div>
+      <div class="price-desc">Płacisz 207 zł co 3 miesiące. Oszczędzasz 60 zł.</div>
+      <ul class="price-features">
+        <li>Wszystko z planu miesięcznego</li>
+        <li>Dostęp do archiwum planów</li>
+        <li>Priorytetowe odpowiedzi od Ani</li>
+        <li>Bonus: przewodnik żywieniowy PDF</li>
+        <li>Bonus: protokół snu — starter kit</li>
+      </ul>
+      <a href="#" class="price-btn price-btn-fill">Wybieram kwartalny →</a>
+    </div>
+  </div>
+  <p class="price-note">Płatność przez BLIK, kartę lub przelew. Faktura VAT na życzenie. Możesz zrezygnować w każdej chwili.</p>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <p class="section-eyebrow" style="text-align:center;">FAQ</p>
+  <h2 class="section-title" style="text-align:center;">Najczęstsze<br><em>pytania</em></h2>
+
+  <div class="faq-grid">
+    <div class="faq-item">
+      <div class="faq-q">Czy muszę mieć doświadczenie z treningiem siłowym?</div>
+      <div class="faq-a">Nie — program jest zaprojektowany tak, żebyś mogła zacząć od zera. Każde ćwiczenie ma instrukcję wideo z techniką. Zaczynamy od podstaw i budujemy siłę stopniowo.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Czy mogę ćwiczyć w domu bez sprzętu?</div>
+      <div class="faq-a">Tak — wszystkie treningi mają wersję domową (bez sprzętu) i wersję na siłownię. Ty wybierasz co Ci odpowiada, możesz też miksować w zależności od dnia.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Ile czasu zajmują treningi?</div>
+      <div class="faq-a">30–45 minut, 3–4 razy w tygodniu. Protokoły biohackingu (oddech, sen, poranny rytuał) to dodatkowe 5–10 minut dziennie. Nie ma tu przepełnionych planów.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Kiedy zobaczę efekty?</div>
+      <div class="faq-a">Pierwsze zmiany w poziomie energii i jakości snu zazwyczaj pojawiają się po 1–2 tygodniach. Widoczne zmiany sylwetki i siły — po 6–8 tygodniach regularnych treningów.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Co jeśli mam nieregularny cykl?</div>
+      <div class="faq-a">Protokoły są elastyczne i dostosujesz je do siebie. W grupie omawiamy różne sytuacje — PCOS, nieregularny cykl, perimenopauza. Nie jesteś sama.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Czy mogę zrezygnować kiedy chcę?</div>
+      <div class="faq-a">Tak — bez żadnych ukrytych opłat i bez konieczności tłumaczenia się. Rezygnujesz jednym kliknięciem, dostęp masz do końca opłaconego okresu.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Jak wygląda dostęp do materiałów?</div>
+      <div class="faq-a">Po opłaceniu subskrypcji dostajesz dostęp do zamkniętej grupy i platformy z materiałami. Nowe plany pojawiają się 1. każdego miesiąca.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Czy mogę ćwiczyć podczas okresu?</div>
+      <div class="faq-a">Tak — masz specjalny plan na fazę menstruacyjną, lżejszy i regeneracyjny. Uczymy się słuchać ciała, nie walczyć z nim.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-section">
+  <h2 class="cta-title">Twoja <em>Prime Era</em><br>już na Ciebie czeka.</h2>
+  <p class="cta-sub">Nie jutro. Nie po weekendzie. Teraz.</p>
+  <a href="#cennik" class="cta-btn">Dołączam do klubu →</a>
+  <p class="cta-note">Możesz zrezygnować w każdej chwili. Bez ukrytych opłat.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Twoja <span>Prime Era</span></div>
+  <div class="footer-copy">© 2025 Twoja Prime Era. Wszystkie prawa zastrzeżone.</div>
+</footer>
+
+<script>
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>
